@@ -53,6 +53,7 @@ class _WithdrawalPageState extends State<WithdrawalPage> {
       String message = data['message'];
       //print(message);
       if (message == "success") {
+        showSuccessDialog(context);
         final Map<String, dynamic> requestData = {'user_id': widget.userId};
         final url = Uri.parse('http://127.0.0.1:5000/get_diamonds');
         final response = await http.post(
@@ -80,11 +81,29 @@ class _WithdrawalPageState extends State<WithdrawalPage> {
           // Handle the error or display an error message based on the status code
         }
       }
+
       setState(() {
         addressController.clear();
         amountController.clear();
       });
     }
+  }
+
+  void showSuccessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        Future.delayed(const Duration(seconds: 7), () {
+          Navigator.of(context)
+              .pop(); // Close the success dialog after 3 seconds
+        });
+
+        return const AlertDialog(
+          title: Text('Success'),
+          content: Text('Withdrawal request sent successfully!'),
+        );
+      },
+    );
   }
 
   showLoadingDialog() {

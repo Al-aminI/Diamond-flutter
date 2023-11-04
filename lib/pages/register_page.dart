@@ -115,7 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
           print("Request failed with status: ${response.statusCode}");
           // Handle the error or display an error message based on the status code
         }
-        showSuccessDialog();
+        showSuccessDialog(context);
         Navigator.pop(context);
 
         // then go to EventsPage
@@ -126,6 +126,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       showLoginPage: true,
                     )));
       } else {
+        showSuccessDialog(context);
         //pop menu drawer
         Navigator.pop(context);
 
@@ -137,7 +138,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       showLoginPage: false,
                     )));
       }
+      showSuccessDialog(context);
     } else {
+      showSuccessDialog(context);
       // Request failed, handle the error here.
       //print('Request failed with status: ${response.statusCode}');
       //pop menu drawer
@@ -151,6 +154,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     showLoginPage: true,
                   )));
     }
+    showSuccessDialog(context);
   }
 
   showLoadingDialog() {
@@ -162,11 +166,11 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  void showSuccessDialog() {
+  void showSuccessDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        Future.delayed(const Duration(seconds: 30), () {
+        Future.delayed(const Duration(seconds: 7), () {
           Navigator.of(context)
               .pop(); // Close the success dialog after 3 seconds
         });

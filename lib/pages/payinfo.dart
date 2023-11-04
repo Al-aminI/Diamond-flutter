@@ -27,7 +27,7 @@ class _HistoryPageState extends State<HistoryPage> {
     );
     List<Map<String, dynamic>> data =
         List<Map<String, dynamic>>.from(jsonDecode(response.body));
-    print(data);
+    //print(data);
     return data;
   }
 

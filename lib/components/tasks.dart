@@ -76,15 +76,15 @@ class _MyTasksState extends State<MyTasks> {
     setState(() {
       final diamondProvider =
           Provider.of<DiamondDataProvider>(context, listen: false);
-      diamondProvider.diamondData?.task1 = false;
+      diamondProvider.diamondData?.task1 = true;
     });
 
     Timer(const Duration(seconds: 10), () {
       setState(() {
         final diamondProvider =
             Provider.of<DiamondDataProvider>(context, listen: false);
-        diamondProvider.diamondData?.task1 = true;
-        //widget.dia1 = true;
+        diamondProvider.diamondData?.task1 = false;
+        //widget.dia1 = false;
       });
     });
   }
@@ -94,15 +94,15 @@ class _MyTasksState extends State<MyTasks> {
     setState(() {
       final diamondProvider =
           Provider.of<DiamondDataProvider>(context, listen: false);
-      diamondProvider.diamondData?.task2 = false;
+      diamondProvider.diamondData?.task2 = true;
     });
 
     Timer(const Duration(seconds: 10), () {
       setState(() {
         final diamondProvider =
             Provider.of<DiamondDataProvider>(context, listen: false);
-        diamondProvider.diamondData?.task2 = true;
-        //widget.dia1 = true;
+        diamondProvider.diamondData?.task2 = false;
+        //widget.dia1 = false;
       });
     });
   }
@@ -112,15 +112,15 @@ class _MyTasksState extends State<MyTasks> {
     setState(() {
       final diamondProvider =
           Provider.of<DiamondDataProvider>(context, listen: false);
-      diamondProvider.diamondData?.task3 = false;
+      diamondProvider.diamondData?.task3 = true;
     });
 
     Timer(const Duration(seconds: 10), () {
       setState(() {
         final diamondProvider =
             Provider.of<DiamondDataProvider>(context, listen: false);
-        diamondProvider.diamondData?.task3 = true;
-        //widget.dia1 = true;
+        diamondProvider.diamondData?.task3 = false;
+        //widget.dia1 = false;
       });
     });
   }
@@ -130,14 +130,14 @@ class _MyTasksState extends State<MyTasks> {
     setState(() {
       final diamondProvider =
           Provider.of<DiamondDataProvider>(context, listen: false);
-      diamondProvider.diamondData?.task4 = false;
+      diamondProvider.diamondData?.task4 = true;
     });
 
     Timer(const Duration(seconds: 10), () {
       setState(() {
         final diamondProvider =
             Provider.of<DiamondDataProvider>(context, listen: false);
-        diamondProvider.diamondData?.task4 = true;
+        diamondProvider.diamondData?.task4 = false;
         //widget.dia1 = true;
       });
     });

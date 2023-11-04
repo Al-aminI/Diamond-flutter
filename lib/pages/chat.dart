@@ -47,6 +47,7 @@ class _ChatPageState extends State<ChatPage> {
     final response = await chatIn();
     //print(response.statusCode);
     if (response.statusCode == 200) {
+      showSuccessDialog(context);
       // Request was successful, you can handle the response here.
       //print('Response: ${response.body}');
       Map<String, dynamic> data = jsonDecode(response.body);
@@ -60,10 +61,28 @@ class _ChatPageState extends State<ChatPage> {
     } else {
       // Request failed, handle the error here.
     }
+
     setState(() {
       subjectController.clear();
       messageController.clear();
     });
+  }
+
+  void showSuccessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        Future.delayed(const Duration(seconds: 7), () {
+          Navigator.of(context)
+              .pop(); // Close the success dialog after 3 seconds
+        });
+
+        return const AlertDialog(
+          title: Text('Success'),
+          content: Text('message sent successfully!'),
+        );
+      },
+    );
   }
 
   @override

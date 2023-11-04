@@ -38,7 +38,7 @@ class _NotifPageState extends State<NotifPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 56, 0, 80),
-          title: const Text("My Team"),
+          title: const Text("Notifications"),
         ),
         //drawer: MyDrawer(
         //onEventsTap: goToEventPage,
@@ -66,7 +66,7 @@ class _NotifPageState extends State<NotifPage> {
                   itemCount: response!.length,
                   itemBuilder: (context, index) {
                     return TeamCard(
-                      joined: response[index]["jcreated"],
+                      joined: response[index]["created"],
                       name: response[index]['message'],
                     );
                   },
