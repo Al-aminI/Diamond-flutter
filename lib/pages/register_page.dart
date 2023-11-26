@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../components/my_textfield.dart';
 import '../components/mybutton.dart';
 import 'dart:convert';
+import 'package:csc_picker/csc_picker.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
@@ -23,6 +24,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final nameController = TextEditingController();
   final contactController = TextEditingController();
   final countryController = TextEditingController();
+  final stateController = TextEditingController();
+  final cityController = TextEditingController();
   final genderController = TextEditingController();
   final referralController = TextEditingController();
   final addressController = TextEditingController();
@@ -37,6 +40,8 @@ class _RegisterPageState extends State<RegisterPage> {
       'contact': contactController.text,
       'gender': genderController.text,
       'country': countryController.text,
+      'state': stateController.text,
+      'city': cityController.text,
       'referrer': referralController.text,
       'address': addressController.text,
     };
@@ -249,11 +254,29 @@ class _RegisterPageState extends State<RegisterPage> {
 
               const SizedBox(height: 10),
               // password textfield
-              MyTextField(
+              /*MyTextField(
                 controller: countryController,
                 hintText: "country",
                 obsecureText: false,
+              ),*/
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: CSCPicker(
+                  layout: Layout.vertical,
+                  flagState: CountryFlag.ENABLE,
+                  onCountryChanged: (country) {
+                    countryController.text = country;
+                  },
+                  onStateChanged: (state) {
+                    stateController.text = state ?? "";
+                  },
+                  onCityChanged: (city) {
+                    cityController.text = city ?? "";
+                  },
+                ),
               ),
+              const SizedBox(height: 10),
 
               const SizedBox(height: 10),
               // password textfield

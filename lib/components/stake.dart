@@ -1,5 +1,6 @@
 import 'package:diamond/components/amountfield.dart';
 import 'package:diamond/modules/diamond_provider.dart';
+import 'package:diamond/pages/stake_history.dart';
 import 'package:flutter/material.dart';
 import 'package:diamond/components/mybutton.dart';
 
@@ -147,6 +148,19 @@ class _StakingPageState extends State<StakingPage> {
     );
   }
 
+  void goToStakeHistoryPage() {
+    //pop menu drawer
+    //Navigator.pop(context);
+
+    // then go to EventsPage
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => StakeHistoryPage(
+                  userId: widget.userId,
+                )));
+  }
+
   @override
   Widget build(BuildContext context) {
     final diaProvider = Provider.of<DiamondDataProvider>(context);
@@ -189,7 +203,36 @@ class _StakingPageState extends State<StakingPage> {
         text: "Stake",
       ),
 
-      const SizedBox(height: 30),
+      const SizedBox(height: 70),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: Divider(
+                thickness: 0.5,
+                color: Colors.grey[400],
+              ),
+            ),
+            GestureDetector(
+              onTap: goToStakeHistoryPage,
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child: Text(
+                  "stakes History",
+                  style: TextStyle(color: Color.fromARGB(255, 52, 140, 208)),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Divider(
+                thickness: 0.5,
+                color: Colors.grey[400],
+              ),
+            )
+          ],
+        ),
+      )
     ]));
   }
 }

@@ -27,13 +27,9 @@ class TeamCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: Text(
-                    name,
-                    style:
-                        const TextStyle(decoration: TextDecoration.underline),
-                  ),
+                Text(
+                  name,
+                  //style: const TextStyle(decoration: TextDecoration.underline),
                 ),
                 const SizedBox(height: 10),
                 const Text(

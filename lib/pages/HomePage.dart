@@ -12,6 +12,7 @@ import 'package:diamond/pages/aboutus.dart';
 import 'package:diamond/pages/chat.dart';
 import 'package:diamond/pages/notifs.dart';
 import 'package:diamond/pages/profile.dart';
+import 'package:diamond/pages/stake_history.dart';
 import 'package:diamond/pages/team.dart';
 import 'package:diamond/pages/withdraw.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ import 'package:diamond/auth/login_or_register.dart';
 import 'package:diamond/components/drawer.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 //import 'package:diamond/pages/login_page.dart';
 import 'dart:async';
 
@@ -293,6 +295,19 @@ class _HomePageState extends State<HomePage> {
                 )));
   }
 
+  void goToStakeHistoryPage() {
+    //pop menu drawer
+    //Navigator.pop(context);
+
+    // then go to EventsPage
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => StakeHistoryPage(
+                  userId: widget.userId,
+                )));
+  }
+
   // notification page method
   // sing user in method
   void notif() {
@@ -309,6 +324,33 @@ class _HomePageState extends State<HomePage> {
     const textToShare = 'Diamond Miner App.';
     //print(textToShare);
     Share.share(textToShare);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initBannerAd();
+  }
+
+  late BannerAd bannerAd;
+  bool isAdLoaded = false;
+  var adUnit = "ca-app-pub-8740939877782266/4822074813";
+
+  initBannerAd() {
+    bannerAd = BannerAd(
+      size: AdSize.banner,
+      adUnitId: adUnit,
+      listener: BannerAdListener(onAdLoaded: (ad) {
+        setState(() {
+          isAdLoaded = true;
+        });
+      }, onAdFailedToLoad: (ad, error) {
+        ad.dispose();
+        print(error);
+      }),
+      request: const AdRequest(),
+    );
+    bannerAd.load();
   }
 
   @override
@@ -373,7 +415,8 @@ class _HomePageState extends State<HomePage> {
       case 0:
         return _buildHomePage();
       case 1:
-        return Center(child: StakingPage(userId: widget.userId));
+        return SingleChildScrollView(
+            child: Center(child: StakingPage(userId: widget.userId)));
       case 2:
         return Center(
             child: MyTasks(
@@ -396,216 +439,216 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
             child: Center(
                 child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-          const SizedBox(height: 10),
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(height: 10),
 
-          // logo
-          /*const Icon(
+        // logo
+        /*const Icon(
         Icons.diamond_outlined,
         size: 120,
       ),*/
-          Center(
-            child: userProvider.userData != null
-                ? Text('Welcome ${userProvider.userData?.username}!!!')
-                : const CircularProgressIndicator(),
-          ),
+        Center(
+          child: userProvider.userData != null
+              ? Text('Welcome ${userProvider.userData?.username}!!!')
+              : const CircularProgressIndicator(),
+        ),
 
-          Image.asset(
-            'images/l1.png', // Replace with the actual path to your image asset.
-            width: 120, // Set the desired width.
-            height: 120, // Set the desired height.
-          ),
+        Image.asset(
+          'images/l1.png', // Replace with the actual path to your image asset.
+          width: 120, // Set the desired width.
+          height: 120, // Set the desired height.
+        ),
 
-          const SizedBox(
-            height: 10,
-          ),
-          Center(
-            child: Row(
-              mainAxisAlignment:
-                  MainAxisAlignment.center, // Center the content horizontally.
-              children: [
-                GestureDetector(
-                    onTap: () {
-                      animateImage1();
-                    },
-                    child: Visibility(
-                      visible: diaProvider.diamondData!.dia1,
-                      child: AnimatedContainer(
-                        duration: const Duration(seconds: 1),
-                        transform: Matrix4.translationValues(0, positionY1, 0),
-                        width: size1,
-                        height: size1,
-                        decoration: const BoxDecoration(
-                          color: Colors.transparent,
-                          image: DecorationImage(
-                            image: AssetImage('images/l1.png'),
-                            //fit: BoxFit.cover,
-                          ),
+        const SizedBox(
+          height: 10,
+        ),
+        Center(
+          child: Row(
+            mainAxisAlignment:
+                MainAxisAlignment.center, // Center the content horizontally.
+            children: [
+              GestureDetector(
+                  onTap: () {
+                    animateImage1();
+                  },
+                  child: Visibility(
+                    visible: diaProvider.diamondData!.dia1,
+                    child: AnimatedContainer(
+                      duration: const Duration(seconds: 1),
+                      transform: Matrix4.translationValues(0, positionY1, 0),
+                      width: size1,
+                      height: size1,
+                      decoration: const BoxDecoration(
+                        color: Colors.transparent,
+                        image: DecorationImage(
+                          image: AssetImage('images/l1.png'),
+                          //fit: BoxFit.cover,
                         ),
-                        onEnd: () {
-                          setState(() {
-                            positionY1 = 0; // Reset position
-                            size1 = 50; // Reset size
-                            opacity1 = 1; // Reset opacity
-                            final diamondProvider =
-                                Provider.of<DiamondDataProvider>(context,
-                                    listen: false);
-                            diamondProvider.diamondData?.dia1 = false;
-                          });
-                        },
                       ),
-                    )),
-                const SizedBox(width: 10),
-                GestureDetector(
-                    onTap: () {
-                      animateImage2();
-                    },
-                    child: Visibility(
-                      visible: diaProvider.diamondData!.dia2,
-                      child: AnimatedContainer(
-                        duration: const Duration(seconds: 1),
-                        transform: Matrix4.translationValues(0, positionY2, 0),
-                        width: size2,
-                        height: size2,
-                        decoration: const BoxDecoration(
-                          color: Colors.transparent,
-                          image: DecorationImage(
-                            image: AssetImage('images/l1.png'),
-                            //fit: BoxFit.cover,
-                          ),
+                      onEnd: () {
+                        setState(() {
+                          positionY1 = 0; // Reset position
+                          size1 = 50; // Reset size
+                          opacity1 = 1; // Reset opacity
+                          final diamondProvider =
+                              Provider.of<DiamondDataProvider>(context,
+                                  listen: false);
+                          diamondProvider.diamondData?.dia1 = false;
+                        });
+                      },
+                    ),
+                  )),
+              const SizedBox(width: 10),
+              GestureDetector(
+                  onTap: () {
+                    animateImage2();
+                  },
+                  child: Visibility(
+                    visible: diaProvider.diamondData!.dia2,
+                    child: AnimatedContainer(
+                      duration: const Duration(seconds: 1),
+                      transform: Matrix4.translationValues(0, positionY2, 0),
+                      width: size2,
+                      height: size2,
+                      decoration: const BoxDecoration(
+                        color: Colors.transparent,
+                        image: DecorationImage(
+                          image: AssetImage('images/l1.png'),
+                          //fit: BoxFit.cover,
                         ),
-                        onEnd: () {
-                          setState(() {
-                            positionY2 = 0; // Reset position
-                            size2 = 50; // Reset size
-                            opacity2 = 1; // Reset opacity
-                            final diamondProvider =
-                                Provider.of<DiamondDataProvider>(context,
-                                    listen: false);
-                            diamondProvider.diamondData?.dia2 = false;
-                          });
-                        },
                       ),
-                    )),
-                const SizedBox(width: 10),
-                GestureDetector(
-                    onTap: () {
-                      animateImage3();
-                    },
-                    child: Visibility(
-                      visible: diaProvider.diamondData!.dia3,
-                      child: AnimatedContainer(
-                        duration: const Duration(seconds: 1),
-                        transform: Matrix4.translationValues(0, positionY3, 0),
-                        width: size3,
-                        height: size3,
-                        decoration: const BoxDecoration(
-                          color: Colors.transparent,
-                          image: DecorationImage(
-                            image: AssetImage('images/l1.png'),
-                            //fit: BoxFit.cover,
-                          ),
+                      onEnd: () {
+                        setState(() {
+                          positionY2 = 0; // Reset position
+                          size2 = 50; // Reset size
+                          opacity2 = 1; // Reset opacity
+                          final diamondProvider =
+                              Provider.of<DiamondDataProvider>(context,
+                                  listen: false);
+                          diamondProvider.diamondData?.dia2 = false;
+                        });
+                      },
+                    ),
+                  )),
+              const SizedBox(width: 10),
+              GestureDetector(
+                  onTap: () {
+                    animateImage3();
+                  },
+                  child: Visibility(
+                    visible: diaProvider.diamondData!.dia3,
+                    child: AnimatedContainer(
+                      duration: const Duration(seconds: 1),
+                      transform: Matrix4.translationValues(0, positionY3, 0),
+                      width: size3,
+                      height: size3,
+                      decoration: const BoxDecoration(
+                        color: Colors.transparent,
+                        image: DecorationImage(
+                          image: AssetImage('images/l1.png'),
+                          //fit: BoxFit.cover,
                         ),
-                        onEnd: () {
-                          setState(() {
-                            positionY3 = 0; // Reset position
-                            size3 = 50; // Reset size
-                            opacity3 = 1; // Reset opacity
-                            final diamondProvider =
-                                Provider.of<DiamondDataProvider>(context,
-                                    listen: false);
-                            diamondProvider.diamondData?.dia3 = false;
-                          });
-                        },
                       ),
-                    )),
-                const SizedBox(width: 10),
-                GestureDetector(
-                    onTap: () {
-                      animateImage4();
-                    },
-                    child: Visibility(
-                      visible: diaProvider.diamondData!.dia4,
-                      child: AnimatedContainer(
-                        duration: const Duration(seconds: 1),
-                        transform: Matrix4.translationValues(0, positionY4, 0),
-                        width: size4,
-                        height: size4,
-                        decoration: const BoxDecoration(
-                          color: Colors.transparent,
-                          image: DecorationImage(
-                            image: AssetImage('images/l1.png'),
-                            //fit: BoxFit.cover,
-                          ),
+                      onEnd: () {
+                        setState(() {
+                          positionY3 = 0; // Reset position
+                          size3 = 50; // Reset size
+                          opacity3 = 1; // Reset opacity
+                          final diamondProvider =
+                              Provider.of<DiamondDataProvider>(context,
+                                  listen: false);
+                          diamondProvider.diamondData?.dia3 = false;
+                        });
+                      },
+                    ),
+                  )),
+              const SizedBox(width: 10),
+              GestureDetector(
+                  onTap: () {
+                    animateImage4();
+                  },
+                  child: Visibility(
+                    visible: diaProvider.diamondData!.dia4,
+                    child: AnimatedContainer(
+                      duration: const Duration(seconds: 1),
+                      transform: Matrix4.translationValues(0, positionY4, 0),
+                      width: size4,
+                      height: size4,
+                      decoration: const BoxDecoration(
+                        color: Colors.transparent,
+                        image: DecorationImage(
+                          image: AssetImage('images/l1.png'),
+                          //fit: BoxFit.cover,
                         ),
-                        onEnd: () {
-                          setState(() {
-                            positionY4 = 0; // Reset position
-                            size4 = 50; // Reset size
-                            opacity4 = 1; // Reset opacity
-                            final diamondProvider =
-                                Provider.of<DiamondDataProvider>(context,
-                                    listen: false);
-                            diamondProvider.diamondData?.dia4 = false;
-                          });
-                        },
                       ),
-                    )),
-              ],
-            ),
+                      onEnd: () {
+                        setState(() {
+                          positionY4 = 0; // Reset position
+                          size4 = 50; // Reset size
+                          opacity4 = 1; // Reset opacity
+                          final diamondProvider =
+                              Provider.of<DiamondDataProvider>(context,
+                                  listen: false);
+                          diamondProvider.diamondData?.dia4 = false;
+                        });
+                      },
+                    ),
+                  )),
+            ],
           ),
-          const SizedBox(height: 10),
+        ),
+        const SizedBox(height: 10),
 
-          // welcome back
-          const Text(
-            'Diamond Balance',
-            style: TextStyle(
-                color: Color.fromARGB(255, 52, 44, 55),
-                fontWeight: FontWeight.normal,
-                fontSize: 16,
-                fontFamily: 'Raleway'),
+        // welcome back
+        const Text(
+          'Diamond Balance',
+          style: TextStyle(
+              color: Color.fromARGB(255, 52, 44, 55),
+              fontWeight: FontWeight.normal,
+              fontSize: 16,
+              fontFamily: 'Raleway'),
+        ),
+
+        const SizedBox(height: 15),
+
+        Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '${diaProvider.diamondData?.amount}',
+                //'1.0',
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 55, 44, 44),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    fontFamily: 'Raleway'),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              const Icon(
+                Icons.currency_exchange_rounded,
+                size: 20,
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Text(
+                '${(result)}',
+                //'0.0265',
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 55, 44, 44),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    fontFamily: 'Raleway'),
+              ),
+            ],
           ),
+        ),
 
-          const SizedBox(height: 15),
-
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '${diaProvider.diamondData?.amount}',
-                  //'1.0',
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 55, 44, 44),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: 'Raleway'),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Icon(
-                  Icons.currency_exchange_rounded,
-                  size: 20,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  '${(result)}',
-                  //'0.0265',
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 55, 44, 44),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: 'Raleway'),
-                ),
-              ],
-            ),
-          ),
-
-          /*const SizedBox(height: 5),
+        /*const SizedBox(height: 5),
 
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -623,73 +666,84 @@ class _HomePageState extends State<HomePage> {
         ),
       ),*/
 
-          const SizedBox(height: 25),
-          /*MyTextField(
+        const SizedBox(height: 25),
+        /*MyTextField(
                   controller: eventnameController,
                   hintText: "type the new event name here",
                   obsecureText: false),
               const SizedBox(height: 25),*/
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Center(
-                          child: MyCard(
-                              onTap: () {}, text: "HASH POWER : + 0 . 0 1 0")),
-                      const SizedBox(width: 3),
-                      Center(
-                          child: MyCard(
-                              onTap: goToWithdrawPage, text: "WITHDRAWAL")),
-                    ],
-                  ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                        child: MyCard(
+                            onTap: goToStakeHistoryPage,
+                            text: "STAKE HISTORY")),
+                    const SizedBox(width: 3),
+                    Center(
+                        child: MyCard(
+                            onTap: goToWithdrawPage, text: "WITHDRAWAL")),
+                  ],
                 ),
-                const SizedBox(height: 10),
-                Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Center(
-                        child:
-                            MyCard(onTap: goToTeamPage, text: "OLINE TEAM:  0"),
-                      ),
-                      //const SizedBox(width: 3),
-                      Center(
-                          child: MyCard(onTap: onShareTap, text: "REFERREL")),
-                    ],
-                  ),
+              ),
+              const SizedBox(height: 10),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child:
+                          MyCard(onTap: goToTeamPage, text: "OLINE TEAM:  0"),
+                    ),
+                    //const SizedBox(width: 3),
+                    Center(child: MyCard(onTap: onShareTap, text: "REFERREL")),
+                  ],
                 ),
-                const SizedBox(
-                  height: 15,
-                ),
-                // logo
-                Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                        child: GestureDetector(
-                          onTap: goToChatPage,
-                          child: const Icon(
-                            Icons.contact_support_outlined,
-                            size: 55,
-                            color: Color.fromARGB(255, 52, 44, 55),
-                          ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              // logo
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: GestureDetector(
+                        onTap: goToChatPage,
+                        child: const Icon(
+                          Icons.contact_support_outlined,
+                          size: 55,
+                          color: Color.fromARGB(255, 52, 44, 55),
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    )
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
+        ),
 
-          // MyEventButton(onTap: newEvent, text: "Proceed")
-        ]))));
+        // MyEventButton(onTap: newEvent, text: "Proceed")
+        const SizedBox(
+          height: 10,
+        ),
+        isAdLoaded
+            ? SizedBox(
+                height: bannerAd.size.height.toDouble(),
+                width: bannerAd.size.height.toDouble(),
+                child: AdWidget(ad: bannerAd),
+              )
+            : const SizedBox()
+      ],
+    ))));
   }
 }

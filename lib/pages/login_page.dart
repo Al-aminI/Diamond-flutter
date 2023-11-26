@@ -11,7 +11,7 @@ import 'package:diamond/components/mybutton.dart';
 import 'package:diamond/pages/HomePage.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'dart:convert';
 
 import '../auth/login_or_register.dart';
@@ -246,6 +246,34 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    initBannerAd();
+  }
+
+  late BannerAd bannerAd;
+  bool isAdLoaded = false;
+  var adUnit = "ca-app-pub-3940256099942544/6300978111";
+
+  initBannerAd() {
+    bannerAd = BannerAd(
+      size: AdSize.banner,
+      adUnitId: adUnit,
+      listener: BannerAdListener(onAdLoaded: (ad) {
+        setState(() {
+          isAdLoaded = true;
+        });
+      }, onAdFailedToLoad: (ad, error) {
+        ad.dispose();
+        print("errrrrooooorrrrrrr");
+        print(error);
+      }),
+      request: const AdRequest(),
+    );
+    bannerAd.load();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 254, 247, 255),
@@ -258,10 +286,11 @@ class _LoginPageState extends State<LoginPage> {
                     colors: [Colors.pink, Colors.purple],
                   ),
                 ),*/
-            child: Center(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+            child: SingleChildScrollView(
+                child: Center(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
               const SizedBox(height: 50),
 
               Image.asset(
@@ -352,8 +381,18 @@ class _LoginPageState extends State<LoginPage> {
                     )
                   ],
                 ),
-              )
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              isAdLoaded
+                  ? SizedBox(
+                      height: bannerAd.size.height.toDouble(),
+                      width: bannerAd.size.height.toDouble(),
+                      child: AdWidget(ad: bannerAd),
+                    )
+                  : const SizedBox()
               // google + apple login buttons
-            ]))));
+            ])))));
   }
 }

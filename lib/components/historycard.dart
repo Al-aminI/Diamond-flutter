@@ -32,7 +32,7 @@ class HistoryCard extends StatelessWidget {
                 onTap: () {},
                 child: Text(
                   address,
-                  style: const TextStyle(decoration: TextDecoration.underline),
+                  //style: const TextStyle(decoration: TextDecoration.underline),
                 ),
               ),
               const SizedBox(height: 10),
