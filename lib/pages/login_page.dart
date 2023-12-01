@@ -5,6 +5,7 @@ import 'package:diamond/modules/notification_data.dart';
 import 'package:diamond/modules/notificationsprovider.dart';
 import 'package:diamond/modules/user_data.dart';
 import 'package:diamond/modules/user_data_provider.dart';
+import 'package:diamond/pages/bannerAd.dart';
 import 'package:flutter/material.dart';
 import 'package:diamond/components/my_textfield.dart';
 import 'package:diamond/components/mybutton.dart';
@@ -268,9 +269,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 254, 247, 255),
-        body: SafeArea(
-            /*child: Container(
+      backgroundColor: const Color.fromARGB(255, 254, 247, 255),
+      body: SafeArea(
+        /*child: Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
@@ -278,122 +279,128 @@ class _LoginPageState extends State<LoginPage> {
                     colors: [Colors.pink, Colors.purple],
                   ),
                 ),*/
-            child: SingleChildScrollView(
-                child: Center(
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-              const SizedBox(height: 50),
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 50),
 
-              Image.asset(
-                'images/l1.png', // Replace with the actual path to your image asset.
-                width: 100, // Set the desired width.
-                height: 100, // Set the desired height.
-              ),
-
-              const SizedBox(height: 50),
-
-              // welcome back
-              Text(
-                'Welcome back to Diamond',
-                style: TextStyle(color: Colors.grey[700]),
-              ),
-
-              const SizedBox(height: 25),
-
-              //email textfield
-              MyTextField(
-                controller: emailController,
-                hintText: "email",
-                obsecureText: false,
-              ),
-
-              const SizedBox(height: 10),
-
-              // password textfield
-              MyTextField(
-                controller: passwordController,
-                hintText: "password",
-                obsecureText: true,
-              ),
-
-              const SizedBox(height: 10),
-
-              // forgot password text
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "forgot password?",
-                      style: TextStyle(color: Colors.grey[600]),
-                    ),
-                  ],
+                Image.asset(
+                  'images/l1.png', // Replace with the actual path to your image asset.
+                  width: 100, // Set the desired width.
+                  height: 100, // Set the desired height.
                 ),
-              ),
 
-              const SizedBox(height: 25),
+                const SizedBox(height: 50),
 
-              // signin button
-              MyButton(
-                onTap: () {}, //signUserIn,
-                text: "Sign In",
-              ),
+                // welcome back
+                Text(
+                  'Welcome back to Diamond',
+                  style: TextStyle(color: Colors.grey[700]),
+                ),
 
-              const SizedBox(height: 50),
+                const SizedBox(height: 25),
 
-              // or continue with
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        thickness: 0.5,
-                        color: Colors.grey[400],
+                //email textfield
+                MyTextField(
+                  controller: emailController,
+                  hintText: "email",
+                  obsecureText: false,
+                ),
+
+                const SizedBox(height: 10),
+
+                // password textfield
+                MyTextField(
+                  controller: passwordController,
+                  hintText: "password",
+                  obsecureText: true,
+                ),
+
+                const SizedBox(height: 10),
+
+                // forgot password text
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        "forgot password?",
+                        style: TextStyle(color: Colors.grey[600]),
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: widget.onTap,
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Text(
-                          "Or register",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 52, 140, 208)),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 25),
+
+                // signin button
+                MyButton(
+                  onTap: () {}, //signUserIn,
+                  text: "Sign In",
+                ),
+
+                const SizedBox(height: 50),
+
+                // or continue with
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          thickness: 0.5,
+                          color: Colors.grey[400],
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        thickness: 0.5,
-                        color: Colors.grey[400],
+                      GestureDetector(
+                        onTap: widget.onTap,
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Text(
+                            "Or register",
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 52, 140, 208)),
+                          ),
+                        ),
                       ),
-                    )
-                  ],
+                      Expanded(
+                        child: Divider(
+                          thickness: 0.5,
+                          color: Colors.grey[400],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              _bannerAd == null
-                  ? Container()
-                  : Container(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      height: 52,
-                      child: AdWidget(ad: _bannerAd!)),
-              // Padding(
-              //   padding: const EdgeInsets.all(8.0),
-              //   child: isAdLoaded
-              //       ? SizedBox(
-              //           height: bannerAd!.size.height.toDouble(),
-              //           width: bannerAd!.size.height.toDouble(),
-              //           ,
-              //         )
-              //       : const SizedBox(),
-              // )
-              // google + apple login buttons
-            ])))));
+                const SizedBox(
+                  height: 10,
+                ),
+                const BannerAdComponent(),
+                _bannerAd == null
+                    ? Container()
+                    : Container(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        height: 52,
+                        child: AdWidget(ad: _bannerAd!)),
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: isAdLoaded
+                //       ? SizedBox(
+                //           height: bannerAd!.size.height.toDouble(),
+                //           width: bannerAd!.size.height.toDouble(),
+                //           ,
+                //         )
+                //       : const SizedBox(),
+                // )
+                // google + apple login buttons
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
