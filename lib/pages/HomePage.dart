@@ -334,7 +334,7 @@ class _HomePageState extends State<HomePage> {
 
   late BannerAd bannerAd;
   bool isAdLoaded = false;
-  var adUnit = "ca-app-pub-8740939877782266/4822074813";
+  var adUnit = "ca-app-pub-3940256099942544/6300978111";
 
   initBannerAd() {
     bannerAd = BannerAd(

@@ -166,7 +166,7 @@ class _ProfilePageState extends State<ProfilePage> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Update Status'),
-            content: const Column(
+            content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text("profile updated successifully"),
@@ -203,7 +203,7 @@ class _ProfilePageState extends State<ProfilePage> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Update Status'),
-            content: const Column(
+            content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text("Oops, please try again"),

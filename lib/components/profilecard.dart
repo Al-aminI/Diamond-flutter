@@ -102,7 +102,7 @@ class _MyProfileCardState extends State<MyProfileCard> {
                       ),
                       width: 115,
                       height: 150,
-                      child: const Center(
+                      child: Center(
                         child: Column(
                           children: [
                             Icon(
@@ -137,7 +137,7 @@ class _MyProfileCardState extends State<MyProfileCard> {
                       ),
                       width: 115,
                       height: 150,
-                      child: const Center(
+                      child: Center(
                         child: Column(
                           children: [
                             Icon(
@@ -179,7 +179,7 @@ class _MyProfileCardState extends State<MyProfileCard> {
                       ),
                       width: 115,
                       height: 150,
-                      child: const Center(
+                      child: Center(
                         child: Column(
                           children: [
                             Icon(
@@ -214,7 +214,7 @@ class _MyProfileCardState extends State<MyProfileCard> {
                       ),
                       width: 115,
                       height: 150,
-                      child: const Center(
+                      child: Center(
                         child: Column(
                           children: [
                             Icon(
@@ -256,7 +256,7 @@ class _MyProfileCardState extends State<MyProfileCard> {
                       ),
                       width: 115,
                       height: 150,
-                      child: const Center(
+                      child: Center(
                         child: Column(
                           children: [
                             Icon(
@@ -291,7 +291,7 @@ class _MyProfileCardState extends State<MyProfileCard> {
                       ),
                       width: 115,
                       height: 150,
-                      child: const Center(
+                      child: Center(
                         child: Column(
                           children: [
                             Icon(

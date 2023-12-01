@@ -62,7 +62,6 @@ class _MyDrawerState extends State<MyDrawer> {
                       const SnackBar(
                         content: Text('Copied to Clipboard'),
                         dismissDirection: DismissDirection.up,
-                        showCloseIcon: true,
                       ),
                     );
                   },

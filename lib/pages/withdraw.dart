@@ -180,10 +180,10 @@ class _WithdrawalPageState extends State<WithdrawalPage> {
               Container(
                 padding: const EdgeInsets.all(5),
                 margin: const EdgeInsets.symmetric(horizontal: 5),
-                child: const Column(children: [
+                child: Column(children: [
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Note.',
                         style: TextStyle(
                             color: Color.fromARGB(255, 52, 44, 55),
