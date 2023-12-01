@@ -8,12 +8,17 @@ import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
+  MobileAds.instance
+    ..initialize()
+    ..updateRequestConfiguration(
+      RequestConfiguration(testDeviceIds: ['7A091B1D32EBC165A7498F42BBA86391']),
+    );
+  // MobileAds.instance.initialize();
 
-  // Remove or update the test device IDs for production
-  RequestConfiguration requestConfiguration =
-      RequestConfiguration(testDeviceIds: ['DB21FB2E116282C610E58F98BF96340A']);
-  MobileAds.instance.updateRequestConfiguration(requestConfiguration);
+  // // Remove or update the test device IDs for production
+  // RequestConfiguration requestConfiguration =
+  //     RequestConfiguration(testDeviceIds: ['7A091B1D32EBC165A7498F42BBA86391']);
+  // MobileAds.instance.updateRequestConfiguration(requestConfiguration);
 
   runApp(
     MultiProvider(
