@@ -17,7 +17,7 @@ class _StakeHistoryPageState extends State<StakeHistoryPage> {
   Future<List<Map<String, dynamic>>> getTeam() async {
     final Map<String, dynamic> requestData = {'user_id': widget.userId};
 
-    final url = Uri.parse('http://127.0.0.1:5000/get_stake');
+    final url = Uri.parse('https://diamond-7n50.onrender.com/get_stake');
     final response = await http.post(
       url,
       headers: {
@@ -38,7 +38,12 @@ class _StakeHistoryPageState extends State<StakeHistoryPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 56, 0, 80),
-          title: const Text("Stake History"),
+          title: const Text(
+            "Stake History",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
         ),
         //drawer: MyDrawer(
         //onEventsTap: goToEventPage,

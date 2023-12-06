@@ -27,7 +27,7 @@ class _ChatPageState extends State<ChatPage> {
       'message': messageController.text,
       'user_id': widget.userId
     };
-    final url = Uri.parse('http://127.0.0.1:5000/add_chat');
+    final url = Uri.parse('https://diamond-7n50.onrender.com/add_chat');
     final response = await http.post(
       url,
       headers: {

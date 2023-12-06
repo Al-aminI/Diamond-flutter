@@ -45,7 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
       'referrer': referralController.text,
       'address': addressController.text,
     };
-    final url = Uri.parse('http://127.0.0.1:5000/signup');
+    final url = Uri.parse('https://diamond-7n50.onrender.com/signup');
     final response = await http.post(
       url,
       headers: {
@@ -83,7 +83,7 @@ class _RegisterPageState extends State<RegisterPage> {
       if (message == "success") {
         //print("message");
         final Map<String, dynamic> requestData = {'user_id': data["user_id"]};
-        final url = Uri.parse('http://127.0.0.1:5000/get_dia');
+        final url = Uri.parse('https://diamond-7n50.onrender.com/get_dia');
         final response = await http.post(
           url,
           headers: {

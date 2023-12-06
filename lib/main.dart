@@ -1,3 +1,5 @@
+//  import 'package:device_preview/device_preview.dart';
+// import 'package:device_preview/device_preview.dart';
 import 'package:diamond/modules/diamond_provider.dart';
 import 'package:diamond/modules/user_data_provider.dart';
 
@@ -16,6 +18,9 @@ void main() {
   MobileAds.instance.updateRequestConfiguration(requestConfiguration);
 
   runApp(
+    // DevicePreview(
+    //   enabled: true,
+    //   builder: (context) =>
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => UserDataProvider()),
@@ -34,6 +39,7 @@ class MyApp extends StatelessWidget {
     //final WebSocketService webSocketService = WebSocketService();
     return const MaterialApp(
       locale: Locale('en'),
+      //builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
       home: LoginOrRegister(
         showLoginPage: true,
@@ -49,7 +55,7 @@ void main() {
     ..initialize()
     ..updateRequestConfiguration(
       RequestConfiguration(
-          testDeviceIds: ['7B3EEABB8EE11C2BE770B684D95219ECB']),
+          ),
     );
   runApp(
     const CupertinoApp(

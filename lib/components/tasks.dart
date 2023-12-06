@@ -23,7 +23,7 @@ class _MyTasksState extends State<MyTasks> {
       'user_id': userId,
       'dia': diaIndex
     };
-    final url = Uri.parse('http://127.0.0.1:5000/add_diamond');
+    final url = Uri.parse('https://diamond-7n50.onrender.com/add_diamond');
     final response = await http.post(
       url,
       headers: {
@@ -42,7 +42,7 @@ class _MyTasksState extends State<MyTasks> {
 
       if (message == "success") {
         final Map<String, dynamic> requestData = {'user_id': widget.userId};
-        final url = Uri.parse('http://127.0.0.1:5000/get_diamonds');
+        final url = Uri.parse('https://diamond-7n50.onrender.com/get_diamonds');
         final response = await http.post(
           url,
           headers: {

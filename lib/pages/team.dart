@@ -17,7 +17,7 @@ class _TeamPageState extends State<TeamPage> {
   Future<List<Map<String, dynamic>>> getTeam() async {
     final Map<String, dynamic> requestData = {'user_id': widget.userId};
 
-    final url = Uri.parse('http://127.0.0.1:5000/get_team');
+    final url = Uri.parse('https://diamond-7n50.onrender.com/get_team');
     final response = await http.post(
       url,
       headers: {
@@ -38,7 +38,12 @@ class _TeamPageState extends State<TeamPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 56, 0, 80),
-          title: const Text("My Team"),
+          title: const Text(
+            "My Team",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
         ),
         //drawer: MyDrawer(
         //onEventsTap: goToEventPage,

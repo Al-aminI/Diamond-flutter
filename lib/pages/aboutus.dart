@@ -18,7 +18,7 @@ class AboutUsPage extends StatefulWidget {
 
 class _AboutUsPageState extends State<AboutUsPage> {
   Future<List<Map<String, dynamic>>> getEvent() async {
-    final url = Uri.parse('http://127.0.0.1:5000/get_event');
+    final url = Uri.parse('https://diamond-7n50.onrender.com/get_event');
     final response = await http.get(url);
     List<Map<String, dynamic>> data =
         List<Map<String, dynamic>>.from(jsonDecode(response.body));

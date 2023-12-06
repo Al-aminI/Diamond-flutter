@@ -5,6 +5,7 @@ import 'package:diamond/components/card.dart';
 import 'package:diamond/components/profilecard.dart';
 import 'package:diamond/components/stake.dart';
 import 'package:diamond/components/tasks.dart';
+import 'package:diamond/modules/admob_helper.dart';
 import 'package:diamond/modules/diamond_provider.dart';
 //import 'package:diamond/modules/api_service.dart';
 import 'package:diamond/modules/user_data_provider.dart';
@@ -52,7 +53,7 @@ class _HomePageState extends State<HomePage> {
       'user_id': userId,
       'dia': diaIndex
     };
-    final url = Uri.parse('http://127.0.0.1:5000/add_diamond');
+    final url = Uri.parse('https://diamond-7n50.onrender.com/add_diamond');
     final response = await http.post(
       url,
       headers: {
@@ -71,7 +72,7 @@ class _HomePageState extends State<HomePage> {
 
       if (message == "success") {
         final Map<String, dynamic> requestData = {'user_id': widget.userId};
-        final url = Uri.parse('http://127.0.0.1:5000/get_diamonds');
+        final url = Uri.parse('https://diamond-7n50.onrender.com/get_diamonds');
         final response = await http.post(
           url,
           headers: {
@@ -326,31 +327,20 @@ class _HomePageState extends State<HomePage> {
     Share.share(textToShare);
   }
 
+  BannerAd? _bannerAd;
   @override
   void initState() {
     super.initState();
-    initBannerAd();
+    _createBannerAd();
   }
 
-  late BannerAd bannerAd;
-  bool isAdLoaded = false;
-  var adUnit = "ca-app-pub-3940256099942544/6300978111";
-
-  initBannerAd() {
-    bannerAd = BannerAd(
+  void _createBannerAd() {
+    _bannerAd = BannerAd(
       size: AdSize.banner,
-      adUnitId: adUnit,
-      listener: BannerAdListener(onAdLoaded: (ad) {
-        setState(() {
-          isAdLoaded = true;
-        });
-      }, onAdFailedToLoad: (ad, error) {
-        ad.dispose();
-        print(error);
-      }),
+      adUnitId: AdMobService.bannerAdUnitId,
+      listener: AdMobService.bannerAdListener,
       request: const AdRequest(),
-    );
-    bannerAd.load();
+    )..load();
   }
 
   @override
@@ -362,11 +352,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 56, 0, 80),
-        title: const Text("DIAMOND MINE"),
+        iconTheme: const IconThemeData(color: Colors.white),
+        title:
+            const Text("DIAMOND MINE", style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
-            icon: const Icon(Icons
-                .notifications), // Replace 'your_icon' with the desired icon, e.g., Icons.search
+            icon: const Icon(Icons.notifications,
+                color: Color.fromARGB(255, 255, 255,
+                    255)), // Replace 'your_icon' with the desired icon, e.g., Icons.search
             onPressed: notif,
           ),
         ],
@@ -442,7 +435,14 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const SizedBox(height: 10),
+        // _bannerAd == null
+        //     ? Container()
+        //     : Container(
+        //         margin: const EdgeInsets.only(bottom: 12),
+        //         height: 52,
+        //         child: AdWidget(ad: _bannerAd!)),
 
+        // const SizedBox(height: 10),
         // logo
         /*const Icon(
         Icons.diamond_outlined,
@@ -736,13 +736,13 @@ class _HomePageState extends State<HomePage> {
         const SizedBox(
           height: 10,
         ),
-        isAdLoaded
-            ? SizedBox(
-                height: bannerAd.size.height.toDouble(),
-                width: bannerAd.size.height.toDouble(),
-                child: AdWidget(ad: bannerAd),
-              )
-            : const SizedBox()
+        _bannerAd == null
+            ? Container()
+            : Container(
+                margin: const EdgeInsets.only(bottom: 12),
+                height: 52,
+                child: AdWidget(ad: _bannerAd!)),
+        const SizedBox(height: 20)
       ],
     ))));
   }

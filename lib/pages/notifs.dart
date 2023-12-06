@@ -17,7 +17,7 @@ class _NotifPageState extends State<NotifPage> {
   Future<List<Map<String, dynamic>>> getTeam() async {
     final Map<String, dynamic> requestData = {'user_id': widget.userId};
 
-    final url = Uri.parse('http://127.0.0.1:5000/get_notif');
+    final url = Uri.parse('https://diamond-7n50.onrender.com/get_notif');
     final response = await http.post(
       url,
       headers: {
@@ -38,7 +38,12 @@ class _NotifPageState extends State<NotifPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 56, 0, 80),
-          title: const Text("Notifications"),
+          title: const Text(
+            "Notifications",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
         ),
         //drawer: MyDrawer(
         //onEventsTap: goToEventPage,

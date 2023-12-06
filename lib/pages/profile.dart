@@ -48,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
   String addressHint = "";
 
   updateIn() async {
-    final url = Uri.parse('http://127.0.0.1:5000/edit_user');
+    final url = Uri.parse('https://diamond-7n50.onrender.com/edit_user');
     final request = http.MultipartRequest('POST', url);
 
     // Add the image file to the request
@@ -104,7 +104,7 @@ class _ProfilePageState extends State<ProfilePage> {
         //fetchAndSetUserData(data["userId"]);
 
         final Map<String, dynamic> requestData = {'user_id': userId};
-        final url = Uri.parse('http://127.0.0.1:5000/me');
+        final url = Uri.parse('https://diamond-7n50.onrender.com/me');
         final response = await http.post(
           url,
           headers: {
@@ -267,11 +267,16 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 56, 0, 80),
-          title: const Text("Profile"),
+          title: const Text(
+            "Profile",
+            style: TextStyle(color: Colors.white),
+          ),
           actions: [
             IconButton(
-              icon: const Icon(Icons
-                  .notifications), // Replace 'your_icon' with the desired icon, e.g., Icons.search
+              icon: const Icon(
+                Icons.notifications,
+                color: Color.fromARGB(255, 255, 255, 255),
+              ), // Replace 'your_icon' with the desired icon, e.g., Icons.search
               onPressed: notif,
             ),
           ],

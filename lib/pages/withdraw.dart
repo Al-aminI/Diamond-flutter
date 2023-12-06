@@ -28,7 +28,7 @@ class _WithdrawalPageState extends State<WithdrawalPage> {
       'address': addressController.text,
       'user_id': widget.userId
     };
-    final url = Uri.parse('http://127.0.0.1:5000/add_withdrawals');
+    final url = Uri.parse('https://diamond-7n50.onrender.com/add_withdrawals');
     final response = await http.post(
       url,
       headers: {
@@ -55,7 +55,7 @@ class _WithdrawalPageState extends State<WithdrawalPage> {
       if (message == "success") {
         showSuccessDialog(context);
         final Map<String, dynamic> requestData = {'user_id': widget.userId};
-        final url = Uri.parse('http://127.0.0.1:5000/get_diamonds');
+        final url = Uri.parse('https://diamond-7n50.onrender.com/get_diamonds');
         final response = await http.post(
           url,
           headers: {
@@ -124,152 +124,157 @@ class _WithdrawalPageState extends State<WithdrawalPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 56, 0, 80),
-          title: const Text("Withdraw"),
+          title: const Text(
+            "Withdraw",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
         ),
         backgroundColor: const Color.fromARGB(255, 254, 247, 255),
         body: SafeArea(
             child: Center(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-              const SizedBox(height: 30),
+                child: SingleChildScrollView(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            const SizedBox(height: 30),
 
-              // logo
-              const Icon(
-                Icons.attach_money,
-                size: 100,
-              ),
+            // logo
+            const Icon(
+              Icons.attach_money,
+              size: 100,
+            ),
 
-              const SizedBox(height: 30),
+            const SizedBox(height: 30),
 
-              // welcome back
-              Text(
-                'Available TRX: ${(result)} TRX',
-                style: TextStyle(color: Colors.grey[700]),
-              ),
+            // welcome back
+            Text(
+              'Available TRX: ${(result)} TRX',
+              style: TextStyle(color: Colors.grey[700]),
+            ),
 
-              const SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-              MyAmountField(
-                amount: '${diaProvider.diamondData?.amount}',
-                controller: amountController,
-                hintText: "Amount in TRX",
-                obsecureText: false,
-              ),
+            MyAmountField(
+              amount: '${diaProvider.diamondData?.amount}',
+              controller: amountController,
+              hintText: "Amount in TRX",
+              obsecureText: false,
+            ),
 
-              const SizedBox(height: 10),
+            const SizedBox(height: 10),
 
-              // password textfield
-              MyTextField(
-                controller: addressController,
-                hintText: "Trx Address: Tron (TRC20) only",
-                obsecureText: true,
-              ),
+            // password textfield
+            MyTextField(
+              controller: addressController,
+              hintText: "Trx Address: Tron (TRC20) only",
+              obsecureText: true,
+            ),
 
-              const SizedBox(height: 10),
+            const SizedBox(height: 10),
 
-              const SizedBox(height: 25),
+            const SizedBox(height: 25),
 
-              // signin button
-              MyButton(
-                onTap: withdraw,
-                text: "withdraw",
-              ),
+            // signin button
+            MyButton(
+              onTap: withdraw,
+              text: "withdraw",
+            ),
 
-              const SizedBox(height: 30),
-              Container(
-                padding: const EdgeInsets.all(5),
-                margin: const EdgeInsets.symmetric(horizontal: 5),
-                child: Column(children: [
-                  Row(
-                    children: [
-                      const Text(
-                        'Note.',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 52, 44, 55),
-                            fontWeight: FontWeight.normal,
-                            fontSize: 25,
-                            fontFamily: 'Raleway'),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 23,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '1. Only input Tron (TRC20) Wallet Address.',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 52, 44, 55),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
-                            fontFamily: 'Raleway'),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '2. No Withdrawal charges for weekly withdrawals.',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 52, 44, 55),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
-                            fontFamily: 'Raleway'),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '3. Minimum withdrawal is 10 TRX.',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 52, 44, 55),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
-                            fontFamily: 'Raleway'),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '4. withdrawal is once per week (any day of the week).',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 52, 44, 55),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
-                            fontFamily: 'Raleway'),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '5. First withdrawal is after 20 days of Registration.',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 52, 44, 55),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
-                            fontFamily: 'Raleway'),
-                      ),
-                    ],
-                  ),
-                ]),
-              ),
-            ]))));
+            const SizedBox(height: 30),
+            Container(
+              padding: const EdgeInsets.all(5),
+              margin: const EdgeInsets.symmetric(horizontal: 5),
+              child: Column(children: [
+                Row(
+                  children: [
+                    const Text(
+                      'Note.',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 52, 44, 55),
+                          fontWeight: FontWeight.normal,
+                          fontSize: 25,
+                          fontFamily: 'Raleway'),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 23,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '1. Only input Tron (TRC20) Wallet Address.',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 52, 44, 55),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                          fontFamily: 'Raleway'),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '2. No Withdrawal charges for weekly withdrawals.',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 52, 44, 55),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                          fontFamily: 'Raleway'),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '3. Minimum withdrawal is 10 TRX.',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 52, 44, 55),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                          fontFamily: 'Raleway'),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '4. withdrawal is once per week (any day of the week).',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 52, 44, 55),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                          fontFamily: 'Raleway'),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '5. First withdrawal is after 20 days of Registration.',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 52, 44, 55),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                          fontFamily: 'Raleway'),
+                    ),
+                  ],
+                ),
+              ]),
+            ),
+          ]),
+        ))));
   }
 }

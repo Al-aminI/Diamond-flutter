@@ -17,7 +17,7 @@ class _HistoryPageState extends State<HistoryPage> {
   Future<List<Map<String, dynamic>>> getHistory() async {
     final Map<String, dynamic> requestData = {'user_id': widget.userId};
 
-    final url = Uri.parse('http://127.0.0.1:5000/get_withdrawals');
+    final url = Uri.parse('https://diamond-7n50.onrender.com/get_withdrawals');
     final response = await http.post(
       url,
       headers: {
@@ -38,7 +38,10 @@ class _HistoryPageState extends State<HistoryPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 56, 0, 80),
-          title: const Text("Withdrawal History"),
+          title: const Text(
+            "Withdrawal History",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
         //drawer: MyDrawer(
         //onEventsTap: goToEventPage,

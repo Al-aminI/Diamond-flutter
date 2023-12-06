@@ -30,7 +30,7 @@ class _StakingPageState extends State<StakingPage> {
       'amount': stakeController.text,
       'user_id': widget.userId
     };
-    final url = Uri.parse('http://127.0.0.1:5000/add_stake');
+    final url = Uri.parse('https://diamond-7n50.onrender.com/add_stake');
     final response = await http.post(
       url,
       headers: {
@@ -60,7 +60,7 @@ class _StakingPageState extends State<StakingPage> {
       if (message == "success") {
         showSuccessDialog(context);
         final Map<String, dynamic> requestData = {'user_id': widget.userId};
-        final url = Uri.parse('http://127.0.0.1:5000/get_diamonds');
+        final url = Uri.parse('https://diamond-7n50.onrender.com/get_diamonds');
         final response = await http.post(
           url,
           headers: {
@@ -90,7 +90,8 @@ class _StakingPageState extends State<StakingPage> {
         final Map<String, dynamic> stakeRequestData = {
           'user_id': widget.userId
         };
-        final stakeUrl = Uri.parse('http://127.0.0.1:5000/get_stake');
+        final stakeUrl =
+            Uri.parse('https://diamond-7n50.onrender.com/get_stake');
         final stakeResponse = await http.post(
           stakeUrl,
           headers: {
